@@ -2,7 +2,7 @@
     "name": "link-pop",
     "version": "1.0.0",
     "description": "link pop up previewer",
-    "main": "./lib/LinkPop.jsx",
+    "main": "./lib/LinkPop.js",
     "license": "MIT",
     "scripts": {
         "build": "webpack"
