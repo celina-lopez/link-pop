@@ -2,7 +2,7 @@ var path = require('path');
 
 module.exports = {
     mode: 'production',
-    entry: './src/LinkPop.jsx',
+    entry: './src/LinkPop.js',
     output: {
         path: path.resolve('lib'),
         filename: 'LinkPop.js',
