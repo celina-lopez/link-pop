@@ -34,6 +34,5 @@ export const Icon = styled.div`
 
 export const DropdownSection = styled.div`
   padding: var(--spacer);
-  position: relative;
   z-index: 1;
 `

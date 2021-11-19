@@ -27,6 +27,7 @@ const NavbarItemEl = styled.li`
 const DropdownSlot = styled.div`
   position: absolute;
   left: 50%;
+  bottom: 0px;
   transform: translateX(-50%);
   perspective: 1500px;
 `
@@ -40,8 +41,8 @@ export default class NavbarItem extends Component {
     const { title, children } = this.props
     return (
       <NavbarItemEl onMouseEnter={this.onMouseEnter} onFocus={this.onMouseEnter}>
-        <NavbarItemTitle>{title}</NavbarItemTitle>
         <DropdownSlot>{children}</DropdownSlot>
+        <NavbarItemTitle>{title}</NavbarItemTitle>
       </NavbarItemEl>
     )
   }

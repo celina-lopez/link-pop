@@ -1,6 +1,33 @@
 import styled, { keyframes } from "styled-components"
 import { promoteLayer } from "./utils"
 
+const breatheAnimation = keyframes`
+ 0% { transform: translateY(10px) scale(0.7); opacity: 0.7; }
+ 80% { htransform: translateY(0px) scale(0.7); opacity: 0.7;}
+ 100% { transform: scale(1); opacity: 1}
+`
+const popOut = keyframes`
+0% {
+  transform: translate3d(0, 7%, 0);
+  visibility: visible;
+}
+
+100% {
+  transform: translate3d(0, 0, 0);
+}
+`
+
+const fadeIn = keyframes`
+0% {
+  opacity: 0;
+  transform: translate3d(0, 5%, 0);
+}
+100% {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+`
+
 const getDropdownRootKeyFrame = ({ animatingOut, direction }) => {
   if (!animatingOut && direction) return null
   return keyframes`
@@ -18,8 +45,8 @@ const getDropdownRootKeyFrame = ({ animatingOut, direction }) => {
 export const DropdownRoot = styled.div`
   transform-origin: 0 0;
   ${promoteLayer}
-  animation-name: ${getDropdownRootKeyFrame};
-  animation-duration: ${props => props.duration}ms;
+  animation-name: ${popOut};
+  animation-duration: 100ms;
   /* use 'forwards' to prevent flicker on leave animation */
   animation-fill-mode: forwards;
   /* flex styles will center the caret child component */
@@ -30,23 +57,11 @@ export const DropdownRoot = styled.div`
   top: -20px;
 `
 
-export const Caret = styled.div`
-  width: 0;
-  height: 0;
-  border-width: 10px;
-  border-style: solid;
-  border-color: transparent transparent var(--white);
-  /* make sure it's above the main dropdown container so now box-shadow bleeds over it */
-  z-index: 1;
-  position: relative;
-  /* prevent any gap in between caret and main dropdown */
-  top: 1px;
-`
-
 export const DropdownBackground = styled.div`
   transform-origin: 0 0;
   background-color: var(--white);
   border-radius: 4px;
+  margin-top: 30px;
   overflow: hidden;
   position: relative;
   box-shadow: 0 50px 100px rgba(50, 50, 93, 0.1);

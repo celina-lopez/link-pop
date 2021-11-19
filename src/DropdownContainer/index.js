@@ -3,7 +3,6 @@ import PropTypes from "prop-types"
 import { Flipped } from "react-flip-toolkit"
 import {
   DropdownRoot,
-  Caret,
   DropdownBackground,
   AltBackground,
   InvertedDiv
@@ -76,9 +75,6 @@ class DropdownContainer extends Component {
         animatingOut={animatingOut}
         duration={duration}
       >
-        <Flipped flipId="dropdown-caret">
-          <Caret />
-        </Flipped>
         <Flipped flipId="dropdown">
           <DropdownBackground>
             <Flipped inverseFlipId="dropdown">

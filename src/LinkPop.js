@@ -56,11 +56,15 @@ export default class LinkPop extends Component {
       this.state.activeIndices[this.state.activeIndices.length - 2]
 
     if (typeof currentIndex === "number")
-      CurrentDropdown = () => <iframe src={navbarConfig[currentIndex].dropdown} width = "300px" height = "300px">
-      </iframe>
+      CurrentDropdown = () => <div style={{borderRadius: "7px", border: "solid white 10px", height: "149px"}}>
+        <img src={navbarConfig[currentIndex].dropdown} 
+        width = "150px" 
+        height = "150px"  /></div>
     if (typeof prevIndex === "number") {
-      PrevDropdown = () => <iframe src={navbarConfig[prevIndex].dropdown} width = "300px" height = "300px">
-      </iframe>
+      PrevDropdown = () => <div style={{borderRadius: "7px", border: "solid white 10px", height: "149px"}}>
+      <img src={navbarConfig[currentIndex].dropdown} 
+      width = "150px" 
+      height = "150px"  /></div>
       direction = currentIndex > prevIndex ? "right" : "left"
     }
 
