@@ -1,11 +1,6 @@
 import styled, { keyframes } from "styled-components"
 import { promoteLayer } from "./utils"
 
-const breatheAnimation = keyframes`
- 0% { transform: translateY(10px) scale(0.7); opacity: 0.7; }
- 80% { htransform: translateY(0px) scale(0.7); opacity: 0.7;}
- 100% { transform: scale(1); opacity: 1}
-`
 const popOut = keyframes`
 0% {
   transform: translate3d(0, 7%, 0);
@@ -13,17 +8,6 @@ const popOut = keyframes`
 }
 
 100% {
-  transform: translate3d(0, 0, 0);
-}
-`
-
-const fadeIn = keyframes`
-0% {
-  opacity: 0;
-  transform: translate3d(0, 5%, 0);
-}
-100% {
-  opacity: 1;
   transform: translate3d(0, 0, 0);
 }
 `

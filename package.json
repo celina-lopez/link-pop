@@ -1,6 +1,6 @@
 {
     "name": "link-pop",
-    "version": "1.0.1",
+    "version": "1.0.3",
     "description": "link pop up previewer",
     "main": "./lib/LinkPop.js",
     "license": "MIT",

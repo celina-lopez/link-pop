@@ -21,10 +21,9 @@ const getFirstDropdownSectionHeight = el => {
 
 const updateAltBackground = ({
   altBackground,
-  prevDropdown,
   currentDropdown
 }) => {
-  const prevHeight = getFirstDropdownSectionHeight(prevDropdown)
+
   const currentHeight = getFirstDropdownSectionHeight(currentDropdown)
 
   const immediateSetTranslateY = (el, translateY) => {
@@ -32,18 +31,10 @@ const updateAltBackground = ({
     el.style.transition = "transform 0s"
     requestAnimationFrame(() => (el.style.transitionDuration = ""))
   }
-
-  if (prevHeight) {
-    // transition the grey ("alt") background from its previous height to its current height
-    immediateSetTranslateY(altBackground, prevHeight)
-    requestAnimationFrame(() => {
-      altBackground.style.transform = `translateY(${currentHeight}px)`
-    })
-  } else {
     // just immediately set the background to the appropriate height
     // since we don't have a stored value
     immediateSetTranslateY(altBackground, currentHeight)
-  }
+
 }
 
 class DropdownContainer extends Component {
@@ -55,25 +46,23 @@ class DropdownContainer extends Component {
   }
 
   currentDropdownEl = createRef()
-  prevDropdownEl = createRef()
+
 
   componentDidMount() {
     updateAltBackground({
       altBackground: this.altBackgroundEl,
-      prevDropdown: this.prevDropdownEl.current,
       currentDropdown: this.currentDropdownEl.current,
-      duration: this.props.duration
+      duration: 300
     })
   }
 
   render() {
-    const { children, direction, animatingOut, duration } = this.props
-    const [currentDropdown, prevDropdown] = Children.toArray(children)
+    const { children, direction, animatingOut } = this.props
     return (
       <DropdownRoot
         direction={direction}
         animatingOut={animatingOut}
-        duration={duration}
+        duration={300}
       >
         <Flipped flipId="dropdown">
           <DropdownBackground>
@@ -81,30 +70,15 @@ class DropdownContainer extends Component {
               <InvertedDiv>
                 <AltBackground
                   ref={el => (this.altBackgroundEl = el)}
-                  duration={duration}
+                  duration={300}
                 />
                 <FadeContents
                   direction={direction}
-                  duration={duration}
+                  duration={300}
                   ref={this.currentDropdownEl}
                 >
-                  {currentDropdown}
+                  {children}
                 </FadeContents>
-              </InvertedDiv>
-            </Flipped>
-
-            <Flipped inverseFlipId="dropdown" scale>
-              <InvertedDiv absolute>
-                {prevDropdown && (
-                  <FadeContents
-                    animatingOut
-                    direction={direction}
-                    duration={duration}
-                    ref={this.prevDropdownEl}
-                  >
-                    {prevDropdown}
-                  </FadeContents>
-                )}
               </InvertedDiv>
             </Flipped>
           </DropdownBackground>

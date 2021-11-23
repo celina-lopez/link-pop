@@ -23,20 +23,19 @@ const FadeContainer = styled.div`
 `
 
 const propTypes = {
-  duration: PropTypes.number,
   direction: PropTypes.oneOf(["right", "left"]),
   animatingOut: PropTypes.bool,
   children: PropTypes.node
 }
 
 const FadeContents = forwardRef(
-  ({ children, duration, animatingOut, direction }, ref) => (
+  ({ children, animatingOut, direction }, ref) => (
     <FadeContainer
       // prevent screen readers from reading out hidden content
       aria-hidden={animatingOut}
       animatingOut={animatingOut}
       direction={direction}
-      duration={duration}
+      duration={300}
       ref={ref}
     >
       {children}

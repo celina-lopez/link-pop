@@ -1,7 +1,6 @@
 import React, { Component } from "react"
 import Navbar from "./Navbar"
 import NavbarItem from "./Navbar/NavbarItem"
-import { Flipper } from "react-flip-toolkit"
 import DropdownContainer from "./DropdownContainer"
 
 export default class LinkPop extends Component {
@@ -9,27 +8,25 @@ export default class LinkPop extends Component {
     activeIndices: [],
   }
 
-  resetDropdownState = i => {
+  resetDropdownState = () => {
     this.setState({
-      activeIndices: typeof i === "number" ? [i] : [],
+      active: false,
       animatingOut: false
     })
     delete this.animatingOutTimeout
   }
 
-  onMouseEnter = i => {
+  onMouseEnter = () => {
     if (this.animatingOutTimeout) {
       clearTimeout(this.animatingOutTimeout)
-      this.resetDropdownState(i)
+      this.resetDropdownState()
       return
     }
-    if (this.state.activeIndices[this.state.activeIndices.length - 1] === i)
-      return
 
-    this.setState(prevState => ({
-      activeIndices: prevState.activeIndices.concat(i),
+    this.setState({
+      active: true,
       animatingOut: false
-    }))
+    })
   }
 
   onMouseLeave = () => {
@@ -38,65 +35,39 @@ export default class LinkPop extends Component {
     })
     this.animatingOutTimeout = setTimeout(
       this.resetDropdownState,
-      this.props.duration
+      300
     )
   }
 
   render() {
-    const { duration, navbarConfig } = this.props
+    const { src, title } = this.props
     let CurrentDropdown
-    let PrevDropdown
+    
     let direction
-
-    const currentIndex = this.state.activeIndices[
-      this.state.activeIndices.length - 1
-    ]
-    const prevIndex =
-      this.state.activeIndices.length > 1 &&
-      this.state.activeIndices[this.state.activeIndices.length - 2]
-
-    if (typeof currentIndex === "number")
+   
       CurrentDropdown = () => <div style={{borderRadius: "7px", border: "solid white 10px", height: "149px"}}>
-        <img src={navbarConfig[currentIndex].dropdown} 
-        width = "150px" 
-        height = "150px"  /></div>
-    if (typeof prevIndex === "number") {
-      PrevDropdown = () => <div style={{borderRadius: "7px", border: "solid white 10px", height: "149px"}}>
-      <img src={navbarConfig[currentIndex].dropdown} 
+      <img src={src} 
       width = "150px" 
       height = "150px"  /></div>
-      direction = currentIndex > prevIndex ? "right" : "left"
-    }
-
+    
     return (
-      <Flipper
-        flipKey={currentIndex}
-        spring={duration === 300 ? "noWobble" : { stiffness: 10, damping: 10 }}
-      >
-        <Navbar onMouseLeave={this.onMouseLeave}>
-          {navbarConfig.map((n, index) => {
-            return (
-              <NavbarItem
-                key={n.title}
-                title={n.title}
-                index={index}
-                onMouseEnter={this.onMouseEnter}
-              >
-                {currentIndex === index && (
-                  <DropdownContainer
-                    direction={direction}
-                    animatingOut={this.state.animatingOut}
-                    duration={duration}
-                  >
-                    <CurrentDropdown />
-                    {PrevDropdown && <PrevDropdown />}
-                  </DropdownContainer>
-                )}
-              </NavbarItem>
-            )
-          })}
-        </Navbar>
-      </Flipper>
+      <Navbar onMouseLeave={this.onMouseLeave}>
+        <NavbarItem
+          key={title}
+          title={title}
+          onMouseEnter={this.onMouseEnter}
+        >
+          {this.state.active && (
+            <DropdownContainer
+              direction={direction}
+              animatingOut={this.state.animatingOut}
+              duration={300}
+            >
+              <CurrentDropdown />
+            </DropdownContainer>
+          )}
+        </NavbarItem>
+      </Navbar>
     )
   }
 }
