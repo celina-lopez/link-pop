@@ -3,6 +3,20 @@
 
 ![ezgif-4-d42f8a9d183d](https://user-images.githubusercontent.com/57647158/143488399-049014d4-706c-44bc-992b-95bf9cabf2f4.gif)
 
+
+### Install
+
+```
+yarn add link-pop
+```
+or 
+
+```
+npm install link-pop
+```
+
+### Usage
+
 ```
 import React from 'react';
 import LinkPop from "link-pop";
