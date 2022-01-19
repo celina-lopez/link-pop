@@ -23,7 +23,7 @@ import LinkPop from "link-pop";
 
 ReactDOM.render(
   <div>
-    come check out this <LinkPop src="photo.png" title:"website"}} />!
+    come check out this <LinkPop src="photo.png" title:"website" />!
   </div>,
   document.getElementById('root')
 );
